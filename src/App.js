@@ -1,50 +1,49 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Header from "./components/Header";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function App() {
   return (
     <Router>
+      <Header user={{ firstName: "Tal" }}></Header>
       <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/about">About</Link>
-            </li>
-            <li>
-              <Link to="/users">Users</Link>
-            </li>
-          </ul>
-        </nav>
-
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
         <Switch>
-          <Route path="/about">
-            <About />
+          <Route path="/register">
+            <Register />
           </Route>
-          <Route path="/users">
-            <Users />
+          <Route path="/groups">
+            <Groups />
+          </Route>
+          <Route path="/surveys">
+            <Surveys />
+          </Route>
+          <Route path="/orders">
+            <Orders />
           </Route>
           <Route path="/">
-            <Home />
+            <Login />
           </Route>
         </Switch>
       </div>
     </Router>
   );
 }
-
-function Home() {
-  return <h2>Home</h2>;
+function Login() {
+  return <h2>Login</h2>;
+}
+function Register() {
+  return <h2>Resgister</h2>;
 }
 
-function About() {
-  return <h2>About</h2>;
+function Groups() {
+  return <h2>Groups</h2>;
 }
-
-function Users() {
-  return <h2>Users</h2>;
+function Surveys() {
+  return <h2>Surveys</h2>;
+}
+function Orders() {
+  return <h2>Orders</h2>;
 }
