@@ -34,13 +34,6 @@ export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const onSubmit = event => {
-    event.preventDefault();
-
-    console.log("email: " + email);
-    console.log("password: " + password);
-  };
-
   return (
     <Container component="main" maxWidth="xs">
       <div className={classes.paper}>
@@ -50,7 +43,7 @@ export default function SignIn() {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form className={classes.form} onSubmit={onSubmit}>
+        <form className={classes.form} action="/login" method="post">
           <TextField
             variant="outlined"
             margin="normal"
