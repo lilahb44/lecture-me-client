@@ -1,7 +1,9 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import styled from "styled-components";
+import CssBaseline from "@material-ui/core/CssBaseline";
 import Header from "./components/Header";
+import SignIn from "./pages/SignIn";
 import Footer from "./components/Footer";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -18,6 +20,7 @@ const Content = styled.div`
 export default function App() {
   return (
     <Router>
+      <CssBaseline />
       <Wrapper>
         <Header user={{ firstName: "Tal" }}></Header>
         <Content>
@@ -37,7 +40,7 @@ export default function App() {
               <Orders />
             </Route>
             <Route path="/">
-              <Login />
+              <SignIn />
             </Route>
           </Switch>
         </Content>
@@ -46,9 +49,7 @@ export default function App() {
     </Router>
   );
 }
-function Login() {
-  return <h2>Login</h2>;
-}
+
 function Register() {
   return <h2>Resgister</h2>;
 }
