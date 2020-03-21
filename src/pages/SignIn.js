@@ -1,10 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Link from "@material-ui/core/Link";
-import Grid from "@material-ui/core/Grid";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
@@ -32,6 +31,15 @@ const useStyles = makeStyles(theme => ({
 
 export default function SignIn() {
   const classes = useStyles();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const onSubmit = event => {
+    event.preventDefault();
+
+    console.log("email: " + email);
+    console.log("password: " + password);
+  };
 
   return (
     <Container component="main" maxWidth="xs">
@@ -42,7 +50,7 @@ export default function SignIn() {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form className={classes.form}>
+        <form className={classes.form} onSubmit={onSubmit}>
           <TextField
             variant="outlined"
             margin="normal"
@@ -51,7 +59,10 @@ export default function SignIn() {
             label="Email Address"
             name="email"
             autoComplete="email"
+            type="email"
             autoFocus
+            value={email}
+            onChange={event => setEmail(event.target.value)}
           />
           <TextField
             variant="outlined"
@@ -62,6 +73,9 @@ export default function SignIn() {
             label="Password"
             type="password"
             autoComplete="current-password"
+            inputProps={{ minLength: 6, maxLength: 32 }}
+            value={password}
+            onChange={event => setPassword(event.target.value)}
           />
           <Button
             type="submit"
@@ -70,10 +84,10 @@ export default function SignIn() {
             color="primary"
             className={classes.submit}
           >
-            Sign In{" "}
+            Sign In
           </Button>
           <Link component={RouterLink} to="/register" variant="body2">
-            {"Don't have an account? Sign Up"}
+            Don't have an account? Sign Up
           </Link>
         </form>
       </div>
