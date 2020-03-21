@@ -4,6 +4,7 @@ import styled from "styled-components";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Header from "./components/Header";
 import SignIn from "./pages/SignIn";
+import Register from "./pages/Register";
 import Footer from "./components/Footer";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -48,10 +49,6 @@ export default function App() {
       </Wrapper>
     </Router>
   );
-}
-
-function Register() {
-  return <h2>Resgister</h2>;
 }
 
 function Groups() {
