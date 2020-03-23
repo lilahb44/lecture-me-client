@@ -34,6 +34,18 @@ export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const onSubmit = async event => {
+    event.preventDefault();
+
+    const { token } = await fetch("https://lecture-me.herokuapp.com/signin", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ email, password }) // body data type must match "Content-Type" header
+    }).then(res => res.json());
+  };
+
   return (
     <Container component="main" maxWidth="xs">
       <div className={classes.paper}>
@@ -43,7 +55,7 @@ export default function SignIn() {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form className={classes.form} action="/login" method="post">
+        <form className={classes.form} onSubmit={onSubmit}>
           <TextField
             variant="outlined"
             margin="normal"

@@ -39,6 +39,18 @@ export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const onSubmit = async event => {
+    event.preventDefault();
+
+    const { token } = await fetch("https://lecture-me.herokuapp.com/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ firstName, lastName, email, password }) // body data type must match "Content-Type" header
+    }).then(res => res.json());
+  };
+
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -49,7 +61,7 @@ export default function Register() {
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
-        <form className={classes.form} action="/register" method="post">
+        <form className={classes.form} onSubmit={onSubmit}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
