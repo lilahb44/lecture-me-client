@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import styled from "styled-components";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -19,17 +19,23 @@ const Content = styled.div`
 `;
 
 export default function App() {
+  const [token, setToken] = useState();
+
+  const onUserLogedIn = token => {
+    setToken(token);
+  };
+
   return (
     <Router>
       <CssBaseline />
       <Wrapper>
-        <Header user={{ firstName: "Tal" }}></Header>
+        <Header token={token}></Header>
         <Content>
           {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
           <Switch>
             <Route path="/register">
-              <Register />
+              <Register onUserLogedIn={onUserLogedIn} />
             </Route>
             <Route path="/groups">
               <Groups />
@@ -41,7 +47,7 @@ export default function App() {
               <Orders />
             </Route>
             <Route path="/">
-              <SignIn />
+              <SignIn onUserLogedIn={onUserLogedIn} />
             </Route>
           </Switch>
         </Content>

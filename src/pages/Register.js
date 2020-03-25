@@ -32,7 +32,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function Register() {
+export default function Register({ onUserLogedIn }) {
   const classes = useStyles();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -42,13 +42,24 @@ export default function Register() {
   const onSubmit = async event => {
     event.preventDefault();
 
-    const { token } = await fetch("https://lecture-me.herokuapp.com/register", {
+    const result = await fetch("https://lecture-me.herokuapp.com/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({ firstName, lastName, email, password }) // body data type must match "Content-Type" header
-    }).then(res => res.json());
+    }).then(res => {
+      if (res.status === 200 || res.status === 400) return res.json();
+
+      console.error("Unknown error", res);
+      return { unKnownError: true };
+    });
+
+    if (result.unKnownError) alert("Unknown error. Please try again.");
+    else if (result.error) alert(result.error);
+    else {
+      onUserLogedIn(result.token);
+    }
   };
 
   return (
@@ -73,7 +84,7 @@ export default function Register() {
                 id="firstName"
                 label="First Name"
                 autoFocus
-                inputProps={{ maxLength: 50 }}
+                inputProps={{ min: 1, maxLength: 45 }}
                 value={firstName}
                 onChange={event => setFirstName(event.target.value)}
               />
@@ -87,7 +98,7 @@ export default function Register() {
                 label="Last Name"
                 name="lastName"
                 autoComplete="lname"
-                inputProps={{ maxLength: 50 }}
+                inputProps={{ min: 1, maxLength: 45 }}
                 value={lastName}
                 onChange={event => setLastName(event.target.value)}
               />
@@ -102,6 +113,7 @@ export default function Register() {
                 type="email"
                 name="email"
                 autoComplete="email"
+                inputProps={{ maxLength: 50 }}
                 value={email}
                 onChange={event => setEmail(event.target.value)}
               />

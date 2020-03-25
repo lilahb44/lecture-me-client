@@ -29,7 +29,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function SignIn() {
+export default function SignIn(props) {
   const classes = useStyles();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -37,13 +37,24 @@ export default function SignIn() {
   const onSubmit = async event => {
     event.preventDefault();
 
-    const { token } = await fetch("https://lecture-me.herokuapp.com/signin", {
+    const result = await fetch("https://lecture-me.herokuapp.com/sign-in", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({ email, password }) // body data type must match "Content-Type" header
-    }).then(res => res.json());
+    }).then(res => {
+      if (res.status === 200 || res.status === 400) return res.json();
+
+      console.error("Unknown error", res);
+      return { unKnownError: true };
+    });
+
+    if (result.unKnownError) alert("Unknown error. Please try again.");
+    else if (result.error) alert(result.error);
+    else {
+      props.onUserLogedIn(result.token);
+    }
   };
 
   return (
