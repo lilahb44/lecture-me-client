@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import styled from "styled-components";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -18,24 +18,27 @@ const Content = styled.div`
   flex: 1;
 `;
 
-export default function App() {
-  const [token, setToken] = useState();
+const TOKEN = "TOKEN";
 
-  const onUserLogedIn = token => {
-    setToken(token);
+export default function App() {
+  const [token, setToken] = useState(() => localStorage.getItem(TOKEN));
+
+  const onTokenChanged = newToken => {
+    setToken(newToken);
+    localStorage.setItem(TOKEN, newToken);
   };
 
   return (
     <Router>
       <CssBaseline />
       <Wrapper>
-        <Header token={token}></Header>
+        <Header token={token} onUserLogedOut={onTokenChanged}></Header>
         <Content>
           {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
           <Switch>
             <Route path="/register">
-              <Register onUserLogedIn={onUserLogedIn} />
+              <Register onUserLogedIn={onTokenChanged} />
             </Route>
             <Route path="/groups">
               <Groups />
@@ -47,7 +50,7 @@ export default function App() {
               <Orders />
             </Route>
             <Route path="/">
-              <SignIn onUserLogedIn={onUserLogedIn} />
+              <SignIn onUserLogedIn={onTokenChanged} />
             </Route>
           </Switch>
         </Content>

@@ -3,7 +3,9 @@ import { Link } from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 
-const Header = ({ token }) => {
+const Header = ({ token, onUserLogedOut }) => {
+  const onLogoutClicked = () => onUserLogedOut(null);
+
   return (
     <Navbar bg="dark" variant="dark">
       <Navbar.Brand as={Link} to="/">
@@ -21,15 +23,9 @@ const Header = ({ token }) => {
             <Nav.Link as={Link} to="/orders">
               Orders
             </Nav.Link>
-            <Nav.Link as={Link} to="/signin">
+            <Nav.Link as={Link} to="/signin" onClick={onLogoutClicked}>
               Logout
             </Nav.Link>
-          </>
-        )}
-        {!token && (
-          <>
-            <Nav.Link as={Link} to="/signnin"></Nav.Link>
-            <Nav.Link as={Link} to="/register"></Nav.Link>
           </>
         )}
       </Nav>
