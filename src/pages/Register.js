@@ -143,7 +143,7 @@ export default function Register({ onUserLogedIn }) {
           >
             Sign Up
           </Button>
-          <Link component={RouterLink} to="/SignIn" variant="body2">
+          <Link component={RouterLink} to="/" variant="body2">
             Already have an account? Sign in
           </Link>
         </form>

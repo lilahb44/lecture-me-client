@@ -1,8 +1,14 @@
-import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import React, { useState } from "react";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect
+} from "react-router-dom";
 import styled from "styled-components";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Header from "./components/Header";
+import Welcome from "./pages/Welcome";
 import SignIn from "./pages/SignIn";
 import Register from "./pages/Register";
 import Footer from "./components/Footer";
@@ -20,45 +26,60 @@ const Content = styled.div`
 
 const TOKEN = "TOKEN";
 
-export default function App() {
-  const [token, setToken] = useState(() => localStorage.getItem(TOKEN));
+const App = () => {
+  const [token, setToken] = useState(() =>
+    JSON.parse(localStorage.getItem(TOKEN))
+  );
 
   const onTokenChanged = newToken => {
     setToken(newToken);
-    localStorage.setItem(TOKEN, newToken);
+    localStorage.setItem(TOKEN, JSON.stringify(newToken));
   };
 
   return (
     <Router>
       <CssBaseline />
       <Wrapper>
-        <Header token={token} onUserLogedOut={onTokenChanged}></Header>
+        <Header
+          token={token}
+          onUserLogedOut={() => onTokenChanged(null)}
+        ></Header>
         <Content>
-          {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
-          <Switch>
-            <Route path="/register">
-              <Register onUserLogedIn={onTokenChanged} />
-            </Route>
-            <Route path="/groups">
-              <Groups />
-            </Route>
-            <Route path="/surveys">
-              <Surveys />
-            </Route>
-            <Route path="/orders">
-              <Orders />
-            </Route>
-            <Route path="/">
-              <SignIn onUserLogedIn={onTokenChanged} />
-            </Route>
-          </Switch>
+          {token ? (
+            <Switch>
+              <Route exact path="/">
+                <Welcome />
+              </Route>
+              <Route path="/groups">
+                <Groups />
+              </Route>
+              <Route path="/surveys">
+                <Surveys />
+              </Route>
+              <Route path="/orders">
+                <Orders />
+              </Route>
+              <Redirect to="/" />
+            </Switch>
+          ) : (
+            <Switch>
+              <Route exact path="/">
+                <SignIn onUserLogedIn={onTokenChanged} />
+              </Route>
+              <Route path="/register">
+                <Register onUserLogedIn={onTokenChanged} />
+              </Route>
+              <Redirect to="/" />
+            </Switch>
+          )}
         </Content>
         <Footer />
       </Wrapper>
     </Router>
   );
-}
+};
+
+export default App;
 
 function Groups() {
   return <h2>Groups</h2>;
