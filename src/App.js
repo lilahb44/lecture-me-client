@@ -48,7 +48,7 @@ const App = () => {
           {token ? (
             <Switch>
               <Route exact path="/">
-                <Welcome />
+                <Welcome token={token} />
               </Route>
               <Route path="/groups">
                 <Groups />
