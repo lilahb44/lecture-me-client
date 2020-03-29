@@ -9,6 +9,7 @@ import styled from "styled-components";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Header from "./components/Header";
 import Welcome from "./pages/Welcome";
+import Groups from "./pages/Groups";
 import SignIn from "./pages/SignIn";
 import Register from "./pages/Register";
 import Footer from "./components/Footer";
@@ -51,7 +52,7 @@ const App = () => {
                 <Welcome token={token} />
               </Route>
               <Route path="/groups">
-                <Groups />
+                <Groups token={token} />
               </Route>
               <Route path="/surveys">
                 <Surveys />
@@ -81,9 +82,6 @@ const App = () => {
 
 export default App;
 
-function Groups() {
-  return <h2>Groups</h2>;
-}
 function Surveys() {
   return <h2>Surveys</h2>;
 }
