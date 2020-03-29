@@ -7,22 +7,33 @@ export default function Groups({ token }) {
 
   const refreshData = () =>
     fetch(`https://lecture-me.herokuapp.com/groups`, {
-      method: "POST",
+      method: "GET",
       headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ token })
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token
+      }
     })
       .then(response => response.json())
       .then(groups => setGroups(groups));
+
+  const insertRow = newData =>
+    fetch(`https://lecture-me.herokuapp.com/groups`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token
+      },
+      body: JSON.stringify({ name: newData.name })
+    }).then(response => response.json());
 
   const deleteRow = oldData =>
     fetch(`https://lecture-me.herokuapp.com/groups`, {
       method: "DELETE",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token
       },
-      body: JSON.stringify({ token, id: oldData.id })
+      body: JSON.stringify({ id: oldData.id })
     }).then(response => response.json());
 
   useEffect(() => {
@@ -45,8 +56,14 @@ export default function Groups({ token }) {
         ]}
         editable={{
           onRowAdd: async newData => {
-            // await insertRow(newData);
-            // await refreshData();
+            const result = groups.find(({ name }) => name === newData.name);
+            if (result) {
+              alert("The name is already exist");
+              return;
+            }
+
+            await insertRow(newData);
+            await refreshData();
           },
           onRowUpdate: async (newData, oldData) => {
             const i = 32;

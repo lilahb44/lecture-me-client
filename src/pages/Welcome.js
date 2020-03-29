@@ -13,11 +13,11 @@ export default function Welcome({ token }) {
 
   useEffect(() => {
     fetch(`https://lecture-me.herokuapp.com/users`, {
-      method: "POST",
+      method: "GET",
       headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ token })
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token
+      }
     })
       .then(response => response.json())
       .then(userData => setUser(userData));
