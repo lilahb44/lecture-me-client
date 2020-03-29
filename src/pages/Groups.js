@@ -26,6 +26,16 @@ export default function Groups({ token }) {
       body: JSON.stringify({ name: newData.name })
     }).then(response => response.json());
 
+  const updateRow = newData =>
+    fetch(`https://lecture-me.herokuapp.com/groups`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token
+      },
+      body: JSON.stringify({ id: newData.id, name: newData.name })
+    }).then(response => response.json());
+
   const deleteRow = oldData =>
     fetch(`https://lecture-me.herokuapp.com/groups`, {
       method: "DELETE",
@@ -65,8 +75,15 @@ export default function Groups({ token }) {
             await insertRow(newData);
             await refreshData();
           },
-          onRowUpdate: async (newData, oldData) => {
-            const i = 32;
+          onRowUpdate: async newData => {
+            const result = groups.find(({ name }) => name === newData.name);
+            if (result) {
+              alert("The name is already exist");
+              return;
+            }
+
+            await updateRow(newData);
+            await refreshData();
           },
           onRowDelete: async oldData => {
             await deleteRow(oldData);
