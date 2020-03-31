@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import MaterialTable from "material-table";
+import styled from "styled-components";
+
+const Wrapper = styled.div`
+  overflow: hidden;
+  margin: auto;
+  width: 96%;
+`;
 
 export default function Groups({ token }) {
   const [groups, setGroups] = useState();
@@ -53,7 +60,7 @@ export default function Groups({ token }) {
 
   if (!groups) return <div>Loading...</div>;
   return (
-    <>
+    <Wrapper>
       <MaterialTable
         title="Your groups"
         columns={[{ title: "Name", field: "name" }]}
@@ -94,6 +101,6 @@ export default function Groups({ token }) {
           }
         }}
       />
-    </>
+    </Wrapper>
   );
 }
