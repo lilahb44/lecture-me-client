@@ -3,7 +3,8 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Redirect
+  Redirect,
+  useParams
 } from "react-router-dom";
 import styled from "styled-components";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -14,6 +15,7 @@ import SignIn from "./pages/SignIn";
 import Register from "./pages/Register";
 import Footer from "./components/Footer";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Guests from "./pages/Guests";
 
 const Wrapper = styled.div`
   display: flex;
@@ -50,6 +52,9 @@ const App = () => {
             <Switch>
               <Route exact path="/">
                 <Welcome token={token} />
+              </Route>
+              <Route path="/groups/:id">
+                <Guests token={token} />
               </Route>
               <Route path="/groups">
                 <Groups token={token} />

@@ -1,13 +1,6 @@
 import React, { useState, useEffect } from "react";
-import Table from "@material-ui/core/Table";
 import MaterialTable from "material-table";
-import Link from "@material-ui/core/Link";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  useParams
-} from "react-router-dom";
+import { BrowserRouter as Router, useParams } from "react-router-dom";
 
 export default function Guests({ token }) {
   const [group, setGroup] = useState();
@@ -24,6 +17,16 @@ export default function Guests({ token }) {
       .then(response => response.json())
       .then(group => setGroup(group));
 
+  const deleteRow = oldData =>
+    fetch(`https://lecture-me.herokuapp.com/groups/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token
+      },
+      body: JSON.stringify({ id: oldData.id })
+    }).then(response => response.json());
+
   useEffect(() => {
     refreshData();
   }, [token]);
@@ -36,6 +39,28 @@ export default function Guests({ token }) {
           <h1>Group - "{group.name}"</h1>
         </div>
       </div>
+
+      <MaterialTable
+        title="Your guests"
+        columns={[
+          { title: "first name", field: "firstName" },
+          { title: "last name", field: "lastName" },
+          { title: "email", field: "email" }
+        ]}
+        data={group.guests}
+        editable={{
+          onRowAdd: async newData => {
+            const i = 32;
+          },
+          onRowUpdate: async newData => {
+            const i = 32;
+          },
+          onRowDelete: async oldData => {
+            await deleteRow(oldData);
+            await refreshData();
+          }
+        }}
+      />
     </>
   );
 }
