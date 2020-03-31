@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import Table from "@material-ui/core/Table";
+import { useHistory, useParams } from "react-router-dom";
 import MaterialTable from "material-table";
 
 export default function Groups({ token }) {
   const [groups, setGroups] = useState();
+  const history = useHistory();
 
   const refreshData = () =>
     fetch(`https://lecture-me.herokuapp.com/groups`, {
@@ -61,7 +62,9 @@ export default function Groups({ token }) {
           {
             icon: "forward",
             tooltip: "go to group",
-            onClick: (event, rowData) => alert("You saved " + rowData.name)
+            onClick: (event, { id }) => {
+              history.push("/groups/" + id);
+            }
           }
         ]}
         editable={{
