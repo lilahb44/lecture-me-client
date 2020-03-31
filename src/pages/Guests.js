@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from "react";
 import MaterialTable from "material-table";
 import { BrowserRouter as Router, useParams } from "react-router-dom";
+import styled from "styled-components";
+
+const Wrapper = styled.div`
+  overflow: hidden;
+  margin: auto;
+  width: 96%;
+`;
 
 export default function Guests({ token }) {
   const [group, setGroup] = useState();
@@ -17,8 +24,22 @@ export default function Guests({ token }) {
       .then(response => response.json())
       .then(group => setGroup(group));
 
+  const insertRow = newData =>
+    fetch(`https://lecture-me.herokuapp.com/groups/${id}/guests`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token
+      },
+      body: JSON.stringify({
+        firstName: newData.firstName,
+        lastName: newData.lastName,
+        email: newData.email
+      })
+    }).then(response => response.json());
+
   const deleteRow = oldData =>
-    fetch(`https://lecture-me.herokuapp.com/groups/${id}`, {
+    fetch(`https://lecture-me.herokuapp.com/groups/${id}/guests`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -33,7 +54,7 @@ export default function Guests({ token }) {
 
   if (!group) return <div>Loading...</div>;
   return (
-    <>
+    <Wrapper>
       <div class="row about text-center">
         <div class="col-12">
           <h1>Group - "{group.name}"</h1>
@@ -50,7 +71,16 @@ export default function Guests({ token }) {
         data={group.guests}
         editable={{
           onRowAdd: async newData => {
-            const i = 32;
+            const result = group.guests.find(
+              ({ email }) => email === newData.email
+            );
+            if (result) {
+              alert("The email is already exist");
+              return;
+            }
+
+            await insertRow(newData);
+            await refreshData();
           },
           onRowUpdate: async newData => {
             const i = 32;
@@ -61,6 +91,6 @@ export default function Guests({ token }) {
           }
         }}
       />
-    </>
+    </Wrapper>
   );
 }
