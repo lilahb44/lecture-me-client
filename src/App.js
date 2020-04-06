@@ -4,7 +4,7 @@ import {
   Switch,
   Route,
   Redirect,
-  useParams
+  useParams,
 } from "react-router-dom";
 import styled from "styled-components";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -16,6 +16,7 @@ import Register from "./pages/Register";
 import Footer from "./components/Footer";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Guests from "./pages/Guests";
+import Surveys from "./pages/Surveys";
 
 const Wrapper = styled.div`
   display: flex;
@@ -34,7 +35,7 @@ const App = () => {
     JSON.parse(localStorage.getItem(TOKEN))
   );
 
-  const onTokenChanged = newToken => {
+  const onTokenChanged = (newToken) => {
     setToken(newToken);
     localStorage.setItem(TOKEN, JSON.stringify(newToken));
   };
@@ -60,7 +61,7 @@ const App = () => {
                 <Groups token={token} />
               </Route>
               <Route path="/surveys">
-                <Surveys />
+                <Surveys token={token} />
               </Route>
               <Route path="/orders">
                 <Orders />
@@ -87,9 +88,6 @@ const App = () => {
 
 export default App;
 
-function Surveys() {
-  return <h2>Surveys</h2>;
-}
 function Orders() {
   return <h2>Orders</h2>;
 }
