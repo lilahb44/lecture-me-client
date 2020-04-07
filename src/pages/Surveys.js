@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import MaterialTable from "material-table";
 import styled from "styled-components";
+import CreateSurvey from "./CreateSurvey";
 
 const Wrapper = styled.div`
   overflow: hidden;
@@ -32,8 +33,14 @@ export default function Surveys({ token }) {
       <div class="row about text-center">
         <div class="col-12">
           <h1>Your Surveys</h1>
+          <br></br>
+        </div>
+        <div class="col-12">
+          <CreateSurvey token={token} />
         </div>
       </div>
+      <br></br>
+      <br></br>
 
       <MaterialTable
         title="Your surveys"
@@ -47,36 +54,6 @@ export default function Surveys({ token }) {
           { title: "vote lecturer 2", field: "percentageVoted2" },
         ]}
         data={survey}
-        // editable={{
-        //   onRowAdd: async newData => {
-        //     const result = survey.find(({ email }) => email === newData.email);
-        //     if (result) {
-        //       alert("The email is already exist");
-        //       return;
-        //     }
-
-        //     await insertRow(newData);
-        //     await refreshData();
-        //   },
-        //   onRowUpdate: async (newData, oldData) => {
-        //     if (newData.email !== oldData.email) {
-        //       const result = survey.guests.find(
-        //         ({ email }) => email === newData.email
-        //       );
-        //       if (result) {
-        //         alert("The email is already exist");
-        //         return;
-        //       }
-        //     }
-
-        //     await updateRow(newData);
-        //     await refreshData();
-        //   },
-        //   onRowDelete: async oldData => {
-        //     await deleteRow(oldData);
-        //     await refreshData();
-        //   }
-        // }}
       />
     </Wrapper>
   );
