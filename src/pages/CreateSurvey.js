@@ -47,6 +47,7 @@ export default function CreateSurvey({ token }) {
     if (selectedLecturer1 === selectedLecturer2)
       return alert("You must choose two diffrent lecturers.");
 
+    createSurvey();
     handleClose();
   };
 
@@ -64,6 +65,20 @@ export default function CreateSurvey({ token }) {
     );
 
   if (!groups || !lecturers) return <div>Loading...</div>;
+
+  const createSurvey = () =>
+    fetch(`https://lecture-me.herokuapp.com/surveys`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+      body: JSON.stringify({
+        groupId: selectedGroup,
+        lecturer1: selectedLecturer1,
+        lecturer2: selectedLecturer2,
+      }),
+    }).then((response) => response.json());
 
   return (
     <Dialog
