@@ -17,6 +17,9 @@ import Footer from "./components/Footer";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Guests from "./pages/Guests";
 import Surveys from "./pages/Surveys";
+import Vote from "./pages/Vote";
+
+const TOKEN = "TOKEN";
 
 const Wrapper = styled.div`
   display: flex;
@@ -28,9 +31,7 @@ const Content = styled.div`
   flex: 1;
 `;
 
-const TOKEN = "TOKEN";
-
-const App = () => {
+const HostApp = () => {
   const [token, setToken] = useState(() =>
     JSON.parse(localStorage.getItem(TOKEN))
   );
@@ -41,53 +42,63 @@ const App = () => {
   };
 
   return (
+    <>
+      <Header
+        token={token}
+        onUserLogedOut={() => onTokenChanged(null)}
+      ></Header>
+      <Content>
+        <Switch>
+          {token
+            ? [
+                <Route exact path="/">
+                  <Welcome token={token} />
+                </Route>,
+                <Route path="/groups/:id">
+                  <Guests token={token} />
+                </Route>,
+                <Route path="/groups">
+                  <Groups token={token} />
+                </Route>,
+                <Route path="/surveys">
+                  <Surveys token={token} />
+                </Route>,
+                <Route path="/orders">
+                  <h2>Orders</h2>
+                </Route>,
+              ]
+            : [
+                <Route exact path="/">
+                  <SignIn onUserLogedIn={onTokenChanged} />
+                </Route>,
+                <Route path="/register">
+                  <Register onUserLogedIn={onTokenChanged} />
+                </Route>,
+              ]}
+          <Redirect to="/" />
+        </Switch>
+      </Content>
+      <Footer />
+    </>
+  );
+};
+
+const App = () => {
+  return (
     <Router>
       <CssBaseline />
       <Wrapper>
-        <Header
-          token={token}
-          onUserLogedOut={() => onTokenChanged(null)}
-        ></Header>
-        <Content>
-          {token ? (
-            <Switch>
-              <Route exact path="/">
-                <Welcome token={token} />
-              </Route>
-              <Route path="/groups/:id">
-                <Guests token={token} />
-              </Route>
-              <Route path="/groups">
-                <Groups token={token} />
-              </Route>
-              <Route path="/surveys">
-                <Surveys token={token} />
-              </Route>
-              <Route path="/orders">
-                <Orders />
-              </Route>
-              <Redirect to="/" />
-            </Switch>
-          ) : (
-            <Switch>
-              <Route exact path="/">
-                <SignIn onUserLogedIn={onTokenChanged} />
-              </Route>
-              <Route path="/register">
-                <Register onUserLogedIn={onTokenChanged} />
-              </Route>
-              <Redirect to="/" />
-            </Switch>
-          )}
-        </Content>
-        <Footer />
+        <Switch>
+          <Route path="/vote">
+            <Vote />
+          </Route>
+          <Route path="/">
+            <HostApp />
+          </Route>
+        </Switch>
       </Wrapper>
     </Router>
   );
 };
 
 export default App;
-
-function Orders() {
-  return <h2>Orders</h2>;
-}

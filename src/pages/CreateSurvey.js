@@ -43,11 +43,13 @@ export default function CreateSurvey({ token }) {
     setOpen(true);
   };
 
-  const send = () => {
+  const send = async () => {
     if (selectedLecturer1 === selectedLecturer2)
       return alert("You must choose two diffrent lecturers.");
 
-    createSurvey();
+    const result = await createSurvey();
+    if (result.error) return alert(result.error);
+
     handleClose();
   };
 
@@ -78,7 +80,7 @@ export default function CreateSurvey({ token }) {
         lecturer1: selectedLecturer1,
         lecturer2: selectedLecturer2,
       }),
-    }).then((response) => response.json());
+    }).then((res) => res.json());
 
   return (
     <Dialog
