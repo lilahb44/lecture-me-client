@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Radio from "@material-ui/core/Radio";
 import styled from "styled-components";
@@ -8,6 +8,7 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
+import useQueryParams from "../hooks/useQueryParams";
 
 const Wrapper = styled.div`
   display: flex;
@@ -37,11 +38,30 @@ const Content = styled.h4`
 `;
 
 const Vote = () => {
-  const [selectedValue, setSelectedValue] = React.useState("a");
+  const [selectedValue, setSelectedValue] = useState("a");
+  const [vote, setVote] = useState();
+  const queryParams = useQueryParams();
 
   const handleChange = (event) => {
     setSelectedValue(event.target.value);
   };
+
+  const refreshData = () =>
+    fetch(`https://lecture-me.herokuapp.com/votes`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + queryParams.get("voterToken"),
+      },
+    })
+      .then((response) => response.json())
+      .then((vote) => setVote(vote));
+
+  useEffect(() => {
+    refreshData();
+  }, []);
+
+  if (!vote) return <div>Loading...</div>;
 
   return (
     <Wrapper>
@@ -58,7 +78,9 @@ const Vote = () => {
           <Card>
             <CardContent>
               <Avatar src="/broken-image.jpg" />
-              <Typography color="textSecondary">Limor Shachar</Typography>
+              <Typography color="textSecondary">
+                {vote.lecturer1_name}
+              </Typography>
               <Typography variant="body2" component="p">
                 about lecturer <br />
               </Typography>
@@ -78,7 +100,9 @@ const Vote = () => {
           <Card>
             <CardContent>
               <Avatar src="/broken-image.jpg" />
-              <Typography color="textSecondary">Roe Levi</Typography>
+              <Typography color="textSecondary">
+                {vote.lecturer2_name}
+              </Typography>
               <Typography variant="body2" component="p">
                 about lecturer <br />
               </Typography>
