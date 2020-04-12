@@ -38,7 +38,7 @@ const Content = styled.h4`
 `;
 
 const Vote = () => {
-  const [selectedValue, setSelectedValue] = useState("a");
+  const [selectedValue, setSelectedValue] = useState("1");
   const [vote, setVote] = useState();
   const queryParams = useQueryParams();
 
@@ -62,6 +62,18 @@ const Vote = () => {
   }, []);
 
   if (!vote) return <div>Loading...</div>;
+
+  const isVoted = () =>
+    fetch(`https://lecture-me.herokuapp.com/votes`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + queryParams.get("voterToken"),
+      },
+      body: JSON.stringify({
+        isVoted: selectedValue,
+      }),
+    }).then((response) => response.json());
 
   return (
     <Wrapper>
@@ -87,11 +99,10 @@ const Vote = () => {
             </CardContent>
             <CardActions>
               <Radio
-                checked={selectedValue === "a"}
+                checked={selectedValue === "1"}
                 onChange={handleChange}
-                value="a"
+                value="1"
                 name="radio-button-demo"
-                inputProps={{ "aria-label": "A" }}
               />
             </CardActions>
           </Card>
@@ -109,17 +120,16 @@ const Vote = () => {
             </CardContent>
             <CardActions>
               <Radio
-                checked={selectedValue === "b"}
+                checked={selectedValue === "2"}
                 onChange={handleChange}
-                value="b"
+                value="2"
                 name="radio-button-demo"
-                inputProps={{ "aria-label": "B" }}
               />
             </CardActions>
           </Card>
         </CardStyled>
       </ChoicesWrapper>
-      <Button variant="contained" color="primary">
+      <Button variant="contained" color="primary" onClick={isVoted}>
         Send
       </Button>
     </Wrapper>
