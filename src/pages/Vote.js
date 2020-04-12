@@ -73,7 +73,9 @@ const Vote = () => {
       body: JSON.stringify({
         isVoted: selectedValue,
       }),
-    }).then((response) => response.json());
+    })
+      .then((response) => response.json())
+      .then(() => alert("Thank you for voting"));
 
   return (
     <Wrapper>
