@@ -14,54 +14,54 @@ export default function Guests({ token }) {
   let { id } = useParams();
 
   const refreshData = () =>
-    fetch(`https://lecture-me.herokuapp.com/groups/${id}`, {
+    fetch(`https://lecture-me.herokuapp.com/userApi/groups/${id}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: "Bearer " + token
-      }
+        Authorization: "Bearer " + token,
+      },
     })
-      .then(response => response.json())
-      .then(group => setGroup(group));
+      .then((response) => response.json())
+      .then((group) => setGroup(group));
 
-  const insertRow = newData =>
-    fetch(`https://lecture-me.herokuapp.com/groups/${id}/guests`, {
+  const insertRow = (newData) =>
+    fetch(`https://lecture-me.herokuapp.com/userApi/groups/${id}/guests`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
-        Authorization: "Bearer " + token
+        Authorization: "Bearer " + token,
       },
       body: JSON.stringify({
         firstName: newData.firstName,
         lastName: newData.lastName,
-        email: newData.email
-      })
-    }).then(response => response.json());
+        email: newData.email,
+      }),
+    }).then((response) => response.json());
 
-  const updateRow = newData =>
-    fetch(`https://lecture-me.herokuapp.com/groups/${id}/guests`, {
+  const updateRow = (newData) =>
+    fetch(`https://lecture-me.herokuapp.com/userApi/groups/${id}/guests`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: "Bearer " + token
+        Authorization: "Bearer " + token,
       },
       body: JSON.stringify({
         id: newData.id,
         firstName: newData.firstName,
         lastName: newData.lastName,
-        email: newData.email
-      })
-    }).then(response => response.json());
+        email: newData.email,
+      }),
+    }).then((response) => response.json());
 
-  const deleteRow = oldData =>
-    fetch(`https://lecture-me.herokuapp.com/groups/${id}/guests`, {
+  const deleteRow = (oldData) =>
+    fetch(`https://lecture-me.herokuapp.com/userApi/groups/${id}/guests`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
-        Authorization: "Bearer " + token
+        Authorization: "Bearer " + token,
       },
-      body: JSON.stringify({ id: oldData.id })
-    }).then(response => response.json());
+      body: JSON.stringify({ id: oldData.id }),
+    }).then((response) => response.json());
 
   useEffect(() => {
     refreshData();
@@ -81,11 +81,11 @@ export default function Guests({ token }) {
         columns={[
           { title: "first name", field: "firstName" },
           { title: "last name", field: "lastName" },
-          { title: "email", field: "email" }
+          { title: "email", field: "email" },
         ]}
         data={group.guests}
         editable={{
-          onRowAdd: async newData => {
+          onRowAdd: async (newData) => {
             const result = group.guests.find(
               ({ email }) => email === newData.email
             );
@@ -111,10 +111,10 @@ export default function Guests({ token }) {
             await updateRow(newData);
             await refreshData();
           },
-          onRowDelete: async oldData => {
+          onRowDelete: async (oldData) => {
             await deleteRow(oldData);
             await refreshData();
-          }
+          },
         }}
       />
     </Wrapper>

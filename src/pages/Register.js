@@ -12,24 +12,24 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
     display: "flex",
     flexDirection: "column",
-    alignItems: "center"
+    alignItems: "center",
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main
+    backgroundColor: theme.palette.secondary.main,
   },
   form: {
     width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(3)
+    marginTop: theme.spacing(3),
   },
   submit: {
-    margin: theme.spacing(3, 0, 2)
-  }
+    margin: theme.spacing(3, 0, 2),
+  },
 }));
 
 export default function Register({ onUserLogedIn }) {
@@ -39,16 +39,19 @@ export default function Register({ onUserLogedIn }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const onSubmit = async event => {
+  const onSubmit = async (event) => {
     event.preventDefault();
 
-    const result = await fetch("https://lecture-me.herokuapp.com/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ firstName, lastName, email, password }) // body data type must match "Content-Type" header
-    }).then(res => {
+    const result = await fetch(
+      "https://lecture-me.herokuapp.com/publicApi/register",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ firstName, lastName, email, password }), // body data type must match "Content-Type" header
+      }
+    ).then((res) => {
       if (res.status === 200 || res.status === 400) return res.json();
 
       console.error("Unknown error", res);
@@ -86,7 +89,7 @@ export default function Register({ onUserLogedIn }) {
                 autoFocus
                 inputProps={{ min: 1, maxLength: 45 }}
                 value={firstName}
-                onChange={event => setFirstName(event.target.value)}
+                onChange={(event) => setFirstName(event.target.value)}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -100,7 +103,7 @@ export default function Register({ onUserLogedIn }) {
                 autoComplete="lname"
                 inputProps={{ min: 1, maxLength: 45 }}
                 value={lastName}
-                onChange={event => setLastName(event.target.value)}
+                onChange={(event) => setLastName(event.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -115,7 +118,7 @@ export default function Register({ onUserLogedIn }) {
                 autoComplete="email"
                 inputProps={{ maxLength: 50 }}
                 value={email}
-                onChange={event => setEmail(event.target.value)}
+                onChange={(event) => setEmail(event.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -130,7 +133,7 @@ export default function Register({ onUserLogedIn }) {
                 autoComplete="current-password"
                 inputProps={{ minLength: 6, maxLength: 32 }}
                 value={password}
-                onChange={event => setPassword(event.target.value)}
+                onChange={(event) => setPassword(event.target.value)}
               />
             </Grid>
           </Grid>

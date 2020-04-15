@@ -14,45 +14,45 @@ export default function Groups({ token }) {
   const history = useHistory();
 
   const refreshData = () =>
-    fetch(`https://lecture-me.herokuapp.com/groups`, {
+    fetch(`https://lecture-me.herokuapp.com/userApi/groups`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: "Bearer " + token
-      }
+        Authorization: "Bearer " + token,
+      },
     })
-      .then(response => response.json())
-      .then(groups => setGroups(groups));
+      .then((response) => response.json())
+      .then((groups) => setGroups(groups));
 
-  const insertRow = newData =>
-    fetch(`https://lecture-me.herokuapp.com/groups`, {
+  const insertRow = (newData) =>
+    fetch(`https://lecture-me.herokuapp.com/userApi/groups`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
-        Authorization: "Bearer " + token
+        Authorization: "Bearer " + token,
       },
-      body: JSON.stringify({ name: newData.name })
-    }).then(response => response.json());
+      body: JSON.stringify({ name: newData.name }),
+    }).then((response) => response.json());
 
-  const updateRow = newData =>
-    fetch(`https://lecture-me.herokuapp.com/groups`, {
+  const updateRow = (newData) =>
+    fetch(`https://lecture-me.herokuapp.com/userApi/groups`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: "Bearer " + token
+        Authorization: "Bearer " + token,
       },
-      body: JSON.stringify({ id: newData.id, name: newData.name })
-    }).then(response => response.json());
+      body: JSON.stringify({ id: newData.id, name: newData.name }),
+    }).then((response) => response.json());
 
-  const deleteRow = oldData =>
-    fetch(`https://lecture-me.herokuapp.com/groups`, {
+  const deleteRow = (oldData) =>
+    fetch(`https://lecture-me.herokuapp.com/userApi/groups`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
-        Authorization: "Bearer " + token
+        Authorization: "Bearer " + token,
       },
-      body: JSON.stringify({ id: oldData.id })
-    }).then(response => response.json());
+      body: JSON.stringify({ id: oldData.id }),
+    }).then((response) => response.json());
 
   useEffect(() => {
     refreshData();
@@ -71,11 +71,11 @@ export default function Groups({ token }) {
             tooltip: "go to group",
             onClick: (event, { id }) => {
               history.push("/groups/" + id);
-            }
-          }
+            },
+          },
         ]}
         editable={{
-          onRowAdd: async newData => {
+          onRowAdd: async (newData) => {
             const result = groups.find(({ name }) => name === newData.name);
             if (result) {
               alert("The name is already exist");
@@ -85,7 +85,7 @@ export default function Groups({ token }) {
             await insertRow(newData);
             await refreshData();
           },
-          onRowUpdate: async newData => {
+          onRowUpdate: async (newData) => {
             const result = groups.find(({ name }) => name === newData.name);
             if (result) {
               alert("The name is already exist");
@@ -95,10 +95,10 @@ export default function Groups({ token }) {
             await updateRow(newData);
             await refreshData();
           },
-          onRowDelete: async oldData => {
+          onRowDelete: async (oldData) => {
             await deleteRow(oldData);
             await refreshData();
-          }
+          },
         }}
       />
     </Wrapper>

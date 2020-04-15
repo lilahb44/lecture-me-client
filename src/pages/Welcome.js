@@ -12,15 +12,15 @@ export default function Welcome({ token }) {
   const [user, setUser] = useState();
 
   useEffect(() => {
-    fetch(`https://lecture-me.herokuapp.com/users`, {
+    fetch(`https://lecture-me.herokuapp.com/userApi/users`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: "Bearer " + token
-      }
+        Authorization: "Bearer " + token,
+      },
     })
-      .then(response => response.json())
-      .then(userData => setUser(userData));
+      .then((response) => response.json())
+      .then((userData) => setUser(userData));
   }, [token]);
 
   if (!user) return <div>Loading...</div>;

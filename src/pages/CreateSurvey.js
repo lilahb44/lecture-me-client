@@ -17,7 +17,7 @@ export default function CreateSurvey({ token }) {
   const [selectedLecturer2, setSelectedLecturer2] = useState();
 
   const fetchData = () => {
-    fetch(`https://lecture-me.herokuapp.com/groups`, {
+    fetch(`https://lecture-me.herokuapp.com/userApi/groups`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -27,7 +27,7 @@ export default function CreateSurvey({ token }) {
       .then((response) => response.json())
       .then((data) => setGroups(data));
 
-    fetch(`https://lecture-me.herokuapp.com/lecturers`, {
+    fetch(`https://lecture-me.herokuapp.com/userApi/lecturers`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -69,7 +69,7 @@ export default function CreateSurvey({ token }) {
   if (!groups || !lecturers) return <div>Loading...</div>;
 
   const createSurvey = () =>
-    fetch(`https://lecture-me.herokuapp.com/surveys`, {
+    fetch(`https://lecture-me.herokuapp.com/userApi/surveys`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

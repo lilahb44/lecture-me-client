@@ -47,7 +47,7 @@ const Vote = () => {
   };
 
   const refreshData = () =>
-    fetch(`https://lecture-me.herokuapp.com/votes`, {
+    fetch(`https://lecture-me.herokuapp.com/voteApi/votes`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -64,7 +64,7 @@ const Vote = () => {
   if (!vote) return <div>Loading...</div>;
 
   const isVoted = () =>
-    fetch(`https://lecture-me.herokuapp.com/votes`, {
+    fetch(`https://lecture-me.herokuapp.com/voteApi/votes`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

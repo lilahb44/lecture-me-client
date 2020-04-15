@@ -13,7 +13,7 @@ export default function Surveys({ token }) {
   const [survey, setSurvey] = useState();
 
   const refreshData = () =>
-    fetch(`https://lecture-me.herokuapp.com/surveys`, {
+    fetch(`https://lecture-me.herokuapp.com/userApi/surveys`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
