@@ -1,68 +1,84 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Lecture Me Client
 
-## Available Scripts
+> LectureMe is an app that assists hosts to organize a meeting with the ability to manage a group, create a survey, invite a lecturer and handle payment through the site.
 
-In the project directory, you can run:
+## Table of contents
 
-### `npm start`
+- [General info](#general-info)
+- [Technologies](#technologies)
+- [Folders](#folders)
+- [Screenshots](#screenshots)
+- [Setup](#setup)
+- [Features](#features)
+- [Status](#status)
+- [Inspiration](#inspiration)
+- [Contact](#contact)
+- [Learn More](#Learn-More)
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## General info
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+This is the LectureMe client side of the project.
 
-### `npm test`
+- This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+- The LectureMe app supports various mobile and browsers.
+- The site supports in user mode. We have one user who already signed in to our system. On login page use the following details:
+  - Username: example_user@gmail.com
+  - Password: 123456
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+* The details above will help you to manage a group, create a survey, invite a lecturer and handle payment through the site.
 
-### `npm run build`
+## Technologies
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Front-end : React.js , Hooks, CSS ,HTML5, Material-ui, Bootstrap.
+- Back-end : Node.js ,MySQL ,Express
+- 3rd party SDKs: SendGrid, PayPal
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+## Folders:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Screenshots
 
-### `npm run eject`
+![Example screenshot](./manageagroup.png)
+![Example screenshot](./addguests.png)
+![Example screenshot](./createasurvey.png)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Setup
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+To run this project, install it locally using npm:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+```
+$ cd ../lecture-me
+$ npm install
+$ npm start
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Code Examples
+
+## Features
+
+List of features ready and TODOs for future development
+
+- Create a survey to guests that it sent to their email with sendgrid.
+
+To-do list:
+
+- Make a user for lecturer.
+- Create calender for lecturer in the site.
+
+## Status
+
+Project is: _in progress_
+
+## Inspiration
+
+Based on the idea I thought after I heard from my parents they host a group of friends and invite a lecturer during the meeting.
+I decided to make them a friendly website they can create a group, make a survey and handle a group payment with PayPal.
+
+## Contact
+
+Created by [@lilahb44](lilahb44@gmail.com) - feel free to contact me!
 
 ## Learn More
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
