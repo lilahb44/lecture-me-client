@@ -2,6 +2,8 @@
 
 > LectureMe is an app that assists hosts to organize a meeting with the ability to manage a group, create a survey, invite a lecturer and handle payment through the site.
 
+- Website link: https://tender-tereshkova-bdf2b1.netlify.app/
+
 ## Table of contents
 
 - [General info](#general-info)
