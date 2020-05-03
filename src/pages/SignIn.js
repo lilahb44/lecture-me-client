@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
+import API from "../utils/API";
+
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
@@ -21,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    width: "100%", // Fix IE 11 issue.
+    width: "100%",
     marginTop: theme.spacing(1),
   },
   submit: {
@@ -37,27 +39,18 @@ export default function SignIn(props) {
   const onSubmit = async (event) => {
     event.preventDefault();
 
-    const result = await fetch(
-      "https://lecture-me.herokuapp.com/publicApi/sign-in",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }), // body data type must match "Content-Type" header
-      }
-    ).then((res) => {
-      if (res.status === 200 || res.status === 400) return res.json();
-
-      console.error("Unknown error", res);
-      return { unKnownError: true };
-    });
-
-    if (result.unKnownError) alert("Unknown error. Please try again.");
-    else if (result.error) alert(result.error);
-    else {
-      props.onUserLogedIn(result.token);
-    }
+    await API.post(`/publicApi/sign-in`, {
+      email,
+      password,
+    })
+      .then((res) => {
+        return props.onUserLogedIn(res.data.token);
+      })
+      .catch((error) => {
+        if (error.response.status === 400)
+          return alert(error.response.data.error);
+        else return alert("Unknown error. Please try again.");
+      });
   };
 
   return (
