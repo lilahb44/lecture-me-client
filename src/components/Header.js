@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 
+//const Header = (props) --- then we need to use props.token and onUserLogedOut
 const Header = ({ token, onUserLogedOut }) => {
   return (
     <Navbar bg="dark" variant="dark">
@@ -18,6 +19,9 @@ const Header = ({ token, onUserLogedOut }) => {
             <Nav.Link as={Link} to="/surveys">
               Surveys
             </Nav.Link>
+            <Nav.Link as={Link} to="/lecturers">
+              Lecturers
+            </Nav.Link>
             <Nav.Link as={Link} to="/orders">
               Orders
             </Nav.Link>
@@ -28,7 +32,5 @@ const Header = ({ token, onUserLogedOut }) => {
     </Navbar>
   );
 };
-
-/*function Header(props) */
 
 export default Header;

@@ -4,7 +4,6 @@ import {
   Switch,
   Route,
   Redirect,
-  useParams,
 } from "react-router-dom";
 import styled from "styled-components";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -18,6 +17,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Guests from "./pages/Guests";
 import Surveys from "./pages/Surveys";
 import Vote from "./pages/Vote";
+import Lecturers from "./pages/Lecturers";
+import LecturerProfile from "./pages/LecturerProfile";
 
 const TOKEN = "TOKEN";
 
@@ -65,6 +66,12 @@ const HostApp = () => {
                 </Route>,
                 <Route path="/orders">
                   <h2>Orders</h2>
+                </Route>,
+                <Route path="/lecturers">
+                  <Lecturers token={token} />
+                </Route>,
+                <Route path="/lecturerProfile">
+                  <LecturerProfile token={token} />
                 </Route>,
               ]
             : [
