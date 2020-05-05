@@ -13,6 +13,9 @@ export default function Lecturers() {
   return (
     <>
       <Container>
+        <Row>
+          <h1>All our awesome lecturers</h1>
+        </Row>
         <Row md={4}>
           <Col>
             <Card style={{ width: "18rem" }}>
