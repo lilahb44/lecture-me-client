@@ -26,7 +26,7 @@ export default function Lecturers() {
                   Some quick example text to build on the card title and make up
                   the bulk of the card's content.
                 </Card.Text>
-                <Link to="/lecturerProfile">
+                <Link to="/lecturerProfile/22">
                   <Button variant="primary">Go to lecturer</Button>
                 </Link>
               </Card.Body>
@@ -41,7 +41,7 @@ export default function Lecturers() {
                   Some quick example text to build on the card title and make up
                   the bulk of the card's content.
                 </Card.Text>
-                <Link to="/lecturerProfile">
+                <Link to="/lecturerProfile/2">
                   <Button variant="primary">Go to lecturer</Button>
                 </Link>
               </Card.Body>
@@ -56,7 +56,7 @@ export default function Lecturers() {
                   Some quick example text to build on the card title and make up
                   the bulk of the card's content.
                 </Card.Text>
-                <Link to="/lecturerProfile">
+                <Link to="/lecturerProfile/12">
                   <Button variant="primary">Go to lecturer</Button>
                 </Link>
               </Card.Body>

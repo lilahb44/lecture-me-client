@@ -70,7 +70,7 @@ const HostApp = () => {
                 <Route path="/lecturers">
                   <Lecturers token={token} />
                 </Route>,
-                <Route path="/lecturerProfile">
+                <Route path="/lecturerProfile/:id">
                   <LecturerProfile token={token} />
                 </Route>,
               ]
