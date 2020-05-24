@@ -104,7 +104,7 @@ export default function LecturerProfile({ token }) {
   if (!groups || !lecturer) return <div>Loading...</div>;
 
   //when fill an order in LecturerProfile
-  const createOrder = async () =>
+  const createOrder = () =>
     fetch(`https://lecture-me.herokuapp.com/userApi/orders`, {
       method: "PUT",
       headers: {
@@ -117,7 +117,9 @@ export default function LecturerProfile({ token }) {
         date: date,
         address: address,
       }),
-    }).then((res) => res.json());
+    })
+      .then((res) => res.json())
+      .then(alert("your request has been sent to lecturer"));
 
   return (
     // <!-- Page Container -->
