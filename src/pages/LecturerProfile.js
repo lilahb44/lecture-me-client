@@ -5,11 +5,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import DateFnsUtils from "@date-io/date-fns";
-import {
-  MuiPickersUtilsProvider,
-  KeyboardDatePicker,
-} from "@material-ui/pickers";
 
 const Wrapper = styled.div`
   max-width: 1400px;
@@ -71,10 +66,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 export default function LecturerProfile({ token }) {
-  const [selectedDate, setSelectedDate] = React.useState(new Date());
-  const [guestsNum, setGuestsNum] = useState("");
-  const [lecture, setLecture] = useState();
   let { id } = useParams();
+  const [date, setDate] = useState("2020-08-10T18:30");
+  // const [guestsNum, setGuestsNum] = useState("");
+  const [group, setGroup] = useState();
+  const [groups, setGroups] = useState();
+  const [status, setStatus] = useState(null);
+  const [address, setAddress] = useState();
+  const [lecturer, setLecturer] = useState();
 
   const fetchData = () => {
     fetch(`https://lecture-me.herokuapp.com/userApi/lecturers/${id}`, {
@@ -85,11 +84,17 @@ export default function LecturerProfile({ token }) {
       },
     })
       .then((response) => response.json())
-      .then((lecture) => setLecture(lecture));
-  };
+      .then((lecturer) => setLecturer(lecturer));
 
-  const handleDateChange = (date) => {
-    setSelectedDate(date);
+    fetch(`https://lecture-me.herokuapp.com/userApi/groups`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => setGroups(data));
   };
 
   const classes = useStyles();
@@ -98,7 +103,24 @@ export default function LecturerProfile({ token }) {
     fetchData();
   }, [token]);
 
-  if (!lecture) return <div>Loading...</div>;
+  if (!lecturer) return <div>Loading...</div>;
+
+  //when fill an order in LecturerProfile
+  // const createOrder = async () =>
+  //   fetch(`https://lecture-me.herokuapp.com/userApi/orders`, {
+  //     method: "PUT",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       Authorization: "Bearer " + token,
+  //     },
+  //     body: JSON.stringify({
+  //       groupId: group,
+  //       lecturerId: lecturer,
+  //       date: date,
+  //       status: status,
+  //       address: address,
+  //     }),
+  //   }).then((res) => res.json());
 
   return (
     // <!-- Page Container -->
@@ -109,14 +131,14 @@ export default function LecturerProfile({ token }) {
         <LeftColumn className="w3-col m4">
           {/* <!-- Profile --> */}
           <Card2>
-            <Name className="w3-center">{lecture.lecturer_name}</Name>
+            <Name className="w3-center">{lecturer.lecturer_name}</Name>
             <div className={classes.root}>
               <Avatar src="/broken-image.jpg" className={classes.large} />
             </div>
 
             <Card2>
               <h3>Catagory</h3>
-              <h5>{lecture.catagory}</h5>
+              <h5>{lecturer.catagory}</h5>
             </Card2>
           </Card2>
         </LeftColumn>
@@ -164,35 +186,23 @@ export default function LecturerProfile({ token }) {
             <SubHeader>Book this experience</SubHeader>
             <Card2>
               <form method="post">
-                <h2>Choose date and time</h2>
-                <br></br>
-                <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                  <KeyboardDatePicker
-                    disableToolbar
-                    variant="inline"
-                    format="MM/dd/yyyy"
-                    margin="normal"
-                    id="date-picker-inline"
-                    label="Date"
-                    value={selectedDate}
-                    onChange={handleDateChange}
-                    KeyboardButtonProps={{
-                      "aria-label": "change date",
-                    }}
-                  />
-                </MuiPickersUtilsProvider>
+                <h2>Date&Time</h2>
                 <TextField
+                  variant="outlined"
+                  fullWidth
                   id="datetime-local"
-                  label="Next appointment"
+                  label="Date"
                   type="datetime-local"
                   margin="normal"
-                  defaultValue="0000-00-00T00:00"
+                  defaultValue="2020-08-10T18:30"
                   className={classes.container}
                   InputLabelProps={{
                     shrink: true,
                   }}
+                  value={date}
+                  onChange={setDate}
                 />
-                <h2>How many are you?</h2>
+                {/* <h2>How many are you?</h2>
                 <TextField
                   variant="outlined"
                   type="number"
@@ -204,6 +214,35 @@ export default function LecturerProfile({ token }) {
                   inputProps={{ min: 1 }}
                   value={guestsNum}
                   onChange={(event) => setGuestsNum(event.target.value)}
+                /> */}
+                <h2>Group Name</h2>
+                <TextField
+                  select
+                  variant="outlined"
+                  label="Group Name"
+                  margin="dense"
+                  fullWidth
+                  value={group}
+                  required
+                  onChange={(event) => setGroup(event.target.value)}
+                >
+                  {groups.map((g) => (
+                    <option key={g.id} value={g.id}>
+                      {g.name}
+                    </option>
+                  ))}
+                </TextField>
+                <h2>Address</h2>
+                <TextField
+                  variant="outlined"
+                  type="text"
+                  required
+                  fullWidth
+                  id="address"
+                  label="address"
+                  name="address"
+                  value={address}
+                  onChange={(event) => setAddress(event.target.value)}
                 />
                 <div>
                   <br></br>
@@ -219,15 +258,6 @@ export default function LecturerProfile({ token }) {
                 </Button>
               </form>
             </Card2>
-
-            {/* <!-- The Modal -->
-            <div id="myFoodAlertModal" class="foodModal">
-              <!-- Modal content -->
-              <div className="modal-content">
-                <span className="close2">&times;</span>
-                <p>0541215412</p>
-              </div>
-            </div> */}
           </Card2>
         </RightColumn>
       </Grid>
