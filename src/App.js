@@ -19,6 +19,8 @@ import Surveys from "./pages/Surveys";
 import Vote from "./pages/Vote";
 import Lecturers from "./pages/Lecturers";
 import LecturerProfile from "./pages/LecturerProfile";
+import Orders from "./pages/Orders";
+import Invitation from "./pages/Invitation";
 
 const TOKEN = "TOKEN";
 
@@ -65,7 +67,7 @@ const HostApp = () => {
                   <Surveys token={token} />
                 </Route>,
                 <Route path="/orders">
-                  <h2>Orders</h2>
+                  <Orders token={token}></Orders>
                 </Route>,
                 <Route path="/lecturers">
                   <Lecturers token={token} />
@@ -98,6 +100,9 @@ const App = () => {
         <Switch>
           <Route path="/vote">
             <Vote />
+          </Route>
+          <Route path="/invitation">
+            <Invitation />
           </Route>
           <Route path="/">
             <HostApp />
