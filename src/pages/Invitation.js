@@ -37,43 +37,25 @@ const Content = styled.h4`
 
 const Invitation = () => {
   const [selectedValue, setSelectedValue] = useState("1");
-  // const [choice, setChoice] = useState();
-  // const queryParams = useQueryParams();
+  const queryParams = useQueryParams();
 
   const handleChange = (event) => {
     setSelectedValue(event.target.value);
   };
 
-  // const refreshData = () =>
-  //   fetch(`https://lecture-me.herokuapp.com/lecturerApi/invitation`, {
-  //     method: "GET",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       Authorization: "Bearer " + queryParams.get("lecturerToken"),
-  //     },
-  //   })
-  //     .then((response) => response.json())
-  //     .then((vote) => setChoice(vote));
-
-  // useEffect(() => {
-  //   refreshData();
-  // }, []);
-
-  //   if (!choice) return <div>Loading...</div>;
-
-  //   const isVoted = () =>
-  //     fetch(`https://lecture-me.herokuapp.com/lecturerApi/invitation`, {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         Authorization: "Bearer " + queryParams.get("lecturerToken"),
-  //       },
-  //       body: JSON.stringify({
-  //         isVoted: selectedValue,
-  //       }),
-  //     })
-  //       .then((response) => response.json())
-  //       .then(() => alert("Thank you for replying"));
+  const isReply = () =>
+    fetch(`https://lecture-me.herokuapp.com/lecturerApi/invitation`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + queryParams.get("lecturerToken"),
+      },
+      body: JSON.stringify({
+        isVoted: selectedValue,
+      }),
+    })
+      .then((response) => response.json())
+      .then(() => alert("Thank you for replying"));
 
   return (
     <Wrapper>
@@ -116,9 +98,9 @@ const Invitation = () => {
           </Card>
         </CardStyled>
       </ChoicesWrapper>
-      {/* <Button variant="contained" color="primary" onClick={isVoted}>
+      <Button variant="contained" color="primary" onClick={isReply}>
         Send
-      </Button> */}
+      </Button>
     </Wrapper>
   );
 };

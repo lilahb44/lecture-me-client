@@ -68,10 +68,8 @@ const useStyles = makeStyles((theme) => ({
 export default function LecturerProfile({ token }) {
   let { id } = useParams();
   const [date, setDate] = useState("2020-08-10T18:30");
-  // const [guestsNum, setGuestsNum] = useState("");
   const [group, setGroup] = useState();
   const [groups, setGroups] = useState();
-  const [status, setStatus] = useState(null);
   const [address, setAddress] = useState();
   const [lecturer, setLecturer] = useState();
 
@@ -103,24 +101,23 @@ export default function LecturerProfile({ token }) {
     fetchData();
   }, [token]);
 
-  if (!lecturer) return <div>Loading...</div>;
+  if (!groups || !lecturer) return <div>Loading...</div>;
 
   //when fill an order in LecturerProfile
-  // const createOrder = async () =>
-  //   fetch(`https://lecture-me.herokuapp.com/userApi/orders`, {
-  //     method: "PUT",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       Authorization: "Bearer " + token,
-  //     },
-  //     body: JSON.stringify({
-  //       groupId: group,
-  //       lecturerId: lecturer,
-  //       date: date,
-  //       status: status,
-  //       address: address,
-  //     }),
-  //   }).then((res) => res.json());
+  const createOrder = async () =>
+    fetch(`https://lecture-me.herokuapp.com/userApi/orders`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+      body: JSON.stringify({
+        groupId: group,
+        lecturerId: lecturer,
+        date: date,
+        address: address,
+      }),
+    }).then((res) => res.json());
 
   return (
     // <!-- Page Container -->
@@ -176,13 +173,6 @@ export default function LecturerProfile({ token }) {
 
         <RightColumn className="w3-col m4">
           <Card2>
-            {/* <SubHeader>My Availability</SubHeader>
-            <Card2>
-              <button id="foodAlertBtn" className="btn btn-danger">
-                Phone
-              </button>
-            </Card2> */}
-
             <SubHeader>Book this experience</SubHeader>
             <Card2>
               <form method="post">
@@ -201,20 +191,8 @@ export default function LecturerProfile({ token }) {
                   }}
                   value={date}
                   onChange={setDate}
-                />
-                {/* <h2>How many are you?</h2>
-                <TextField
-                  variant="outlined"
-                  type="number"
-                  required
-                  fullWidth
-                  id="numOfGuests"
-                  label="number of guests"
-                  name="numOfGuests"
-                  inputProps={{ min: 1 }}
-                  value={guestsNum}
-                  onChange={(event) => setGuestsNum(event.target.value)}
-                /> */}
+                ></TextField>
+
                 <h2>Group Name</h2>
                 <TextField
                   select
@@ -243,7 +221,8 @@ export default function LecturerProfile({ token }) {
                   name="address"
                   value={address}
                   onChange={(event) => setAddress(event.target.value)}
-                />
+                ></TextField>
+
                 <div>
                   <br></br>
                 </div>
@@ -253,6 +232,7 @@ export default function LecturerProfile({ token }) {
                   variant="contained"
                   color="primary"
                   className={classes.submit}
+                  onClick={createOrder}
                 >
                   Send Request
                 </Button>
