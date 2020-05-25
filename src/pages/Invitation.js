@@ -51,7 +51,7 @@ const Invitation = () => {
         Authorization: "Bearer " + queryParams.get("lecturerToken"),
       },
       body: JSON.stringify({
-        isVoted: selectedValue,
+        status: selectedValue,
       }),
     })
       .then((response) => response.json())
