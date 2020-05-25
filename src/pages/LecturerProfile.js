@@ -67,7 +67,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 export default function LecturerProfile({ token }) {
   let { id } = useParams();
-  const [date, setDate] = useState();
+  const [date, setDate] = useState(new Date(2020, 10, 24, 18, 15));
   const [group, setGroup] = useState();
   const [groups, setGroups] = useState();
   const [address, setAddress] = useState();
@@ -115,7 +115,7 @@ export default function LecturerProfile({ token }) {
       },
       body: JSON.stringify({
         groupId: group,
-        lecturerId: lecturer,
+        lecturerId: lecturer.id,
         date: date,
         address: address,
       }),
