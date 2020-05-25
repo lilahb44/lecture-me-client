@@ -8,7 +8,7 @@ const Wrapper = styled.div`
   width: 96%;
 `;
 
-export default function Surveys({ token }) {
+export default function Orders({ token }) {
   const [order, setOrder] = useState();
 
   const refreshData = () =>
@@ -40,7 +40,7 @@ export default function Surveys({ token }) {
       <br></br>
 
       <MaterialTable
-        title="Your surveys"
+        title="Your orders"
         columns={[
           { title: "Invitation date", field: "date" },
           { title: "Group", field: "groupName" },

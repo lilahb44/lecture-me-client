@@ -6,7 +6,6 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import React, { useState } from "react";
-import { responsiveFontSizes } from "@material-ui/core";
 
 export default function CreateSurvey({ token }) {
   const [open, setOpen] = useState(false);

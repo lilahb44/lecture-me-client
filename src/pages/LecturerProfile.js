@@ -67,7 +67,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 export default function LecturerProfile({ token }) {
   let { id } = useParams();
-  const [date, setDate] = useState("2020-08-10T18:30");
+  const [date, setDate] = useState();
   const [group, setGroup] = useState();
   const [groups, setGroups] = useState();
   const [address, setAddress] = useState();
@@ -104,8 +104,10 @@ export default function LecturerProfile({ token }) {
   if (!groups || !lecturer) return <div>Loading...</div>;
 
   //when fill an order in LecturerProfile
-  const createOrder = () =>
-    fetch(`https://lecture-me.herokuapp.com/userApi/orders`, {
+  const createOrder = async (event) => {
+    event.preventDefault();
+
+    await fetch(`https://lecture-me.herokuapp.com/userApi/orders`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -120,6 +122,7 @@ export default function LecturerProfile({ token }) {
     })
       .then((res) => res.json())
       .then(alert("your request has been sent to lecturer"));
+  };
 
   return (
     // <!-- Page Container -->
@@ -177,7 +180,7 @@ export default function LecturerProfile({ token }) {
           <Card2>
             <SubHeader>Book this experience</SubHeader>
             <Card2>
-              <form method="post">
+              <form onSubmit={createOrder}>
                 <h2>Date&Time</h2>
                 <TextField
                   variant="outlined"
@@ -192,7 +195,7 @@ export default function LecturerProfile({ token }) {
                     shrink: true,
                   }}
                   value={date}
-                  onChange={setDate}
+                  onChange={(event) => setDate(event.target.value)}
                 ></TextField>
 
                 <h2>Group Name</h2>
@@ -234,7 +237,6 @@ export default function LecturerProfile({ token }) {
                   variant="contained"
                   color="primary"
                   className={classes.submit}
-                  onClick={createOrder}
                 >
                   Send Request
                 </Button>
