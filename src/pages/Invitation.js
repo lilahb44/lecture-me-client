@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import Avatar from "@material-ui/core/Avatar";
+import React, { useState } from "react";
 import Radio from "@material-ui/core/Radio";
 import styled from "styled-components";
 import Card from "@material-ui/core/Card";
@@ -36,11 +35,11 @@ const Content = styled.h4`
 `;
 
 const Invitation = () => {
-  const [selectedValue, setSelectedValue] = useState("1");
+  const [selectedStatus, setSelectedStatus] = useState(1);
   const queryParams = useQueryParams();
 
   const handleChange = (event) => {
-    setSelectedValue(event.target.value);
+    setSelectedStatus(event.target.value);
   };
 
   const isReply = () =>
@@ -51,7 +50,7 @@ const Invitation = () => {
         Authorization: "Bearer " + queryParams.get("lecturerToken"),
       },
       body: JSON.stringify({
-        status: selectedValue,
+        status: selectedStatus,
       }),
     })
       .then((response) => response.json())
@@ -74,7 +73,7 @@ const Invitation = () => {
             </CardContent>
             <CardActions>
               <Radio
-                checked={selectedValue === "1"}
+                checked={selectedStatus === 1}
                 onChange={handleChange}
                 value="1"
                 name="radio-button-demo"
@@ -89,7 +88,7 @@ const Invitation = () => {
             </CardContent>
             <CardActions>
               <Radio
-                checked={selectedValue === "0"}
+                checked={selectedStatus === 0}
                 onChange={handleChange}
                 value="0"
                 name="radio-button-demo"
