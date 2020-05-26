@@ -118,6 +118,7 @@ export default function LecturerProfile({ token }) {
         lecturerId: lecturer.id,
         date: date,
         address: address,
+        price: lecturer.price,
       }),
     })
       .then((res) => res.json())
@@ -141,6 +142,10 @@ export default function LecturerProfile({ token }) {
             <Card2>
               <h3>Catagory</h3>
               <h5>{lecturer.catagory}</h5>
+            </Card2>
+            <Card2>
+              <h3>Price</h3>
+              <h5>{lecturer.price}</h5>
             </Card2>
           </Card2>
         </LeftColumn>
