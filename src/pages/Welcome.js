@@ -27,9 +27,15 @@ export default function Welcome({ token }) {
 
   return (
     <>
-      <div class="row about text-center">
-        <div class="col-12">
+      <div className="row about text-center">
+        <div className="col-12">
           <h1>Hi {user.firstName}!</h1>
+        </div>
+        <div className="col-12">
+          <h2>Welcome to our site :)</h2>
+          <h5>
+            In this site, you can easily organize and manage a group meeting
+          </h5>
         </div>
       </div>
       <Container fluid="md">

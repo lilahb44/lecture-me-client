@@ -61,8 +61,13 @@ export default function Groups({ token }) {
   if (!groups) return <div>Loading...</div>;
   return (
     <Wrapper>
+      <div class="row about text-center">
+        <div class="col-12">
+          <h1>Groups</h1>
+          <br></br>
+        </div>
+      </div>
       <MaterialTable
-        title="Your groups"
         columns={[{ title: "Name", field: "name" }]}
         data={groups}
         actions={[

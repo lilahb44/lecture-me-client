@@ -32,7 +32,7 @@ export default function Surveys({ token }) {
     <Wrapper>
       <div class="row about text-center">
         <div class="col-12">
-          <h1>Your Surveys</h1>
+          <h1>Surveys</h1>
           <br></br>
         </div>
         <div class="col-12">

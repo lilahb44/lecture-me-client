@@ -22,7 +22,7 @@ const useLoadPaypal = () => {
 };
 
 export default function Orders({ token }) {
-  const [order, setOrder] = useState();
+  const [orders, setOrder] = useState();
   const paypalLoaded = useLoadPaypal();
 
   const refreshData = () =>
@@ -40,15 +40,15 @@ export default function Orders({ token }) {
     refreshData();
   }, [token]);
 
-  if (!order) return <div>Loading...</div>;
+  if (!orders) return <div>Loading...</div>;
   return (
     <Wrapper>
-      <div class="row about text-center">
-        <div class="col-12">
+      <div className="row about text-center">
+        <div className="col-12">
           <h1>Orders</h1>
           <br></br>
         </div>
-        <div class="col-12"></div>
+        <div className="col-12"></div>
       </div>
       <br></br>
       <br></br>
@@ -63,45 +63,70 @@ export default function Orders({ token }) {
           { title: "Status of lecturer", field: "status" },
           {
             title: "Payment",
-            render: (rowData) =>
-              paypalLoaded &&
-              rowData.status === "Accept" && (
-                <PayPalButton
-                  createOrder={(data, actions) => {
-                    return actions.order.create({
-                      purchase_units: [
-                        {
-                          amount: {
-                            currency_code: "ILS",
-                            value: "3000",
+            render: (rowData) => {
+              console.log("price:", rowData.price);
+              console.log("id:", rowData.id);
+              return (
+                paypalLoaded &&
+                rowData.status === "Accept" && (
+                  <PayPalButton
+                    key={rowData.id}
+                    createOrder={(data, actions) => {
+                      console.log("price:", rowData.price);
+                      console.log("id:", rowData.id);
+                      return actions.order.create({
+                        purchase_units: [
+                          {
+                            amount: {
+                              currency_code: "ILS",
+                              value: rowData.price,
+                            },
+                            custom_id: rowData.id,
                           },
-                          custom_id: "123",
+                        ],
+                        application_context: {
+                          shipping_preference: "NO_SHIPPING",
                         },
-                      ],
-                      application_context: {
-                        shipping_preference: "NO_SHIPPING", // default is "GET_FROM_FILE"
-                      },
-                    });
-                  }}
-                  onSuccess={(details, data) => {
-                    alert(
-                      "Transaction completed by " +
-                        details.payer.name.given_name
-                    );
+                      });
+                    }}
+                    onSuccess={(details, data) => {
+                      alert(
+                        "Transaction completed by " +
+                          details.payer.name.given_name
+                      );
+                      console.log("orderid:", data.orderID);
 
-                    // OPTIONAL: Call your server to save the transaction
-                    return fetch("/paypal-transaction-complete", {
-                      method: "post",
-                      body: JSON.stringify({
-                        orderId: data.orderID,
-                      }),
-                    });
-                  }}
-                />
-              ),
+                      // Call your server to save the transaction
+                      return fetch(
+                        "https://lecture-me.herokuapp.com/userApi/orders/paypal-pay",
+                        {
+                          method: "post",
+                          headers: {
+                            "content-type": "application/json",
+                            Authorization: "Bearer " + token,
+                          },
+                          body: JSON.stringify({
+                            orderId: data.orderID,
+                          }),
+                        }
+                      )
+                        .then(function (res) {
+                          return res.json();
+                        })
+                        .then(function (details) {
+                          alert(
+                            "Transaction approved by " +
+                              details.payer_given_name
+                          );
+                        });
+                    }}
+                  />
+                )
+              );
+            },
           },
         ]}
-        data={order}
+        data={orders}
       />
     </Wrapper>
   );
