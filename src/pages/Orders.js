@@ -114,10 +114,7 @@ export default function Orders({ token }) {
                           return res.json();
                         })
                         .then(function (details) {
-                          alert(
-                            "Transaction approved by " +
-                              details.payer_given_name
-                          );
+                          alert("Transaction approved by LectureMe");
                         });
                     }}
                   />
