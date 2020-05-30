@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import audience1 from "../assets/general/audience1.jpg";
 import audience2 from "../assets/general/audience2.jpg";
 import audience3 from "../assets/general/audience3.jpg";
+import ProcessFlowChart from "../assets/general/ProcessFlowChart.png";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Carousel from "react-bootstrap/Carousel";
 import Container from "react-bootstrap/Container";
@@ -27,17 +28,21 @@ export default function Welcome({ token }) {
 
   return (
     <>
-      <div className="row about text-center">
-        <div className="col-12">
-          <h1>Hi {user.firstName}!</h1>
+      <Container component="main" maxWidth="xs">
+        <div className="row about text-center">
+          <div className="col-12">
+            <h1>Hi {user.firstName}!</h1>
+          </div>
+          <div className="col-12">
+            <img
+              style={{ width: "60rem" }}
+              className="d-block w-100"
+              src={ProcessFlowChart}
+              alt="ProcessFlowChart"
+            />
+          </div>
         </div>
-        <div className="col-12">
-          <h2>Welcome to our site :)</h2>
-          <h5>
-            In this site, you can easily organize and manage a group meeting
-          </h5>
-        </div>
-      </div>
+      </Container>
       <Container fluid="md">
         <Row>
           <Col>
