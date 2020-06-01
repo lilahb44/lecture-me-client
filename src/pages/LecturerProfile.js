@@ -157,16 +157,12 @@ export default function LecturerProfile({ token }) {
             <p>
               The best prohibitions had to deal with them. What is the stress
               response? What happens in the brain and body when the reaction is
-              triggered? Dr. Liat Yakir will elaborate on this, expanding on the
-              stressors in workplaces. One of the stress factors of the current
-              era is digital media and organizations have been facing new
-              challenges over the past decade. Have smartphones taken over our
-              minds? When does technology produce stress and how is it legal
-              about the work environment? Yael from Dawn, who studies the
-              effects of technology on humans will put us in order. Work, the
-              organization will receive practical tools, organizational workers,
-              how to create a healthier work environment,, encourage active
-              engagement and increase organizational empathy.
+              triggered? Have smartphones taken over our minds? When does
+              technology produce stress and how is it legal about the work
+              environment? The effects of technology on humans will put us in
+              order. You will receive practical tools, organizational workers,
+              how to create a healthier work environment and increase
+              organizational empathy.
             </p>
           </Card2>
           <Card2>

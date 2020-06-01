@@ -13,9 +13,11 @@ export default function Lecturers() {
   return (
     <>
       <Container>
+        <br></br>
         <Row>
-          <h1>All our awesome lecturers</h1>
+          <h1 style={{ margin: "auto" }}>All our awesome lecturers</h1>
         </Row>
+        <br></br>
         <Row md={4}>
           <Col>
             <Card style={{ width: "18rem" }}>
@@ -23,8 +25,10 @@ export default function Lecturers() {
               <Card.Body>
                 <Card.Title>Maya Mor</Card.Title>
                 <Card.Text>
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
+                  Dr. Maya Mor is the Director of the Center for European
+                  Studies at the Interdisciplinary Center (IDC), Herzliya. She
+                  received her Ph.D. in Political Science from the
+                  Ludwig-Maximilian University of Munich in 2007.
                 </Card.Text>
                 <Link to="/lecturerProfile/22">
                   <Button variant="primary">Go to lecturer</Button>
@@ -38,8 +42,10 @@ export default function Lecturers() {
               <Card.Body>
                 <Card.Title>Ben Shachar</Card.Title>
                 <Card.Text>
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
+                  Ben Shachar is a Professor of nutrition at Tel Aviv
+                  University, Scientific Advisor to the Museum of Europe in
+                  Brussels and Scientific Director to the Forum de Paris. Ben
+                  Shachar wrote fifteen books about health.
                 </Card.Text>
                 <Link to="/lecturerProfile/2">
                   <Button variant="primary">Go to lecturer</Button>
@@ -53,8 +59,10 @@ export default function Lecturers() {
               <Card.Body>
                 <Card.Title>Roe Cohen</Card.Title>
                 <Card.Text>
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
+                  Roe Cohen’s fields of study areinternational relations,
+                  international economics, history and European studies. He aims
+                  to spend the next few years on deepening his research within
+                  the field of integration-theory.
                 </Card.Text>
                 <Link to="/lecturerProfile/12">
                   <Button variant="primary">Go to lecturer</Button>
