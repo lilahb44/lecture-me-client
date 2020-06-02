@@ -43,6 +43,7 @@ export default function Surveys({ token }) {
       <br></br>
 
       <MaterialTable
+        title="Surveys"
         columns={[
           { title: "date", field: "date" },
           { title: "name", field: "groupName" },
