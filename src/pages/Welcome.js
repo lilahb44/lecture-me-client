@@ -54,7 +54,6 @@ export default function Welcome({ token }) {
                   alt="First slide"
                 />
                 <Carousel.Caption>
-                  <h3>First slide label</h3>
                   <p>“Easy web site to use” </p>
                 </Carousel.Caption>
               </Carousel.Item>
@@ -66,7 +65,6 @@ export default function Welcome({ token }) {
                 />
 
                 <Carousel.Caption>
-                  <h3>Second slide label</h3>
                   <p>“It was a very wonderful experience.”</p>
                 </Carousel.Caption>
               </Carousel.Item>
@@ -78,7 +76,6 @@ export default function Welcome({ token }) {
                 />
 
                 <Carousel.Caption>
-                  <h3>Third slide label</h3>
                   <p>“your service are excellent”</p>
                 </Carousel.Caption>
               </Carousel.Item>
