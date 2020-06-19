@@ -2,18 +2,23 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
+import styled from "styled-components";
+
+const StyledNavbar = styled(Navbar)`
+  flex-shrink: 0;
+`;
 
 const Header = ({ token, onUserLogedOut }) => {
   return (
-    <Navbar collapseOnSelect expand="sm" bg="dark" variant="dark">
+    <StyledNavbar collapseOnSelect expand="sm" bg="dark" variant="dark">
       <Navbar.Brand as={Link} to="/">
         LectureMe
       </Navbar.Brand>
-      <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-      <Navbar.Collapse id="responsive-navbar-nav">
-        <Nav className="mr-auto">
-          {token && (
-            <>
+      {token && (
+        <>
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Collapse id="responsive-navbar-nav">
+            <Nav className="mr-auto">
               <Nav.Link as={Link} to="/groups">
                 Groups
               </Nav.Link>
@@ -27,11 +32,11 @@ const Header = ({ token, onUserLogedOut }) => {
                 Orders
               </Nav.Link>
               <Nav.Link onClick={onUserLogedOut}>Logout</Nav.Link>
-            </>
-          )}
-        </Nav>
-      </Navbar.Collapse>
-    </Navbar>
+            </Nav>
+          </Navbar.Collapse>
+        </>
+      )}
+    </StyledNavbar>
   );
 };
 
