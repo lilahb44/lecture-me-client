@@ -29,10 +29,10 @@ function createPlayer(session, SF, PLAYER_ELEMENT_ID, invitationImageDevMode, va
         sskyplayer.setAttribute('playsinline', "true");
         if (invitationImageDevMode) {
             sskyplayer.setAttribute('poster', invitationImage);
-        } else if (variation === 'tu') {
-            sskyplayer.setAttribute('poster', "https://" + SF + ".images.sundaysky.com/poster_cl/image.png?format=png&text=NAME&text1=NAME1&text2=NAME2&t=1611058096517");
-        } else if (variation === 'pp') {
-            sskyplayer.setAttribute('poster', "https://" + SF + ".images.sundaysky.com/poster_or/image.png?format=png&text=NAME&text1=NAME1&text2=NAME2&t=1611058249470");
+        } else if (variation === 'cl') {
+            sskyplayer.setAttribute('poster', "https://" + SF + ".images.sundaysky.com/poster2/image.png?format=png&text=NAME&text1=NAME1&text2=NAME2&t=1611058096517");
+        } else if (variation === 'or') {
+            sskyplayer.setAttribute('poster', "https://" + SF + ".images.sundaysky.com/poster1/image.png?format=png&text=NAME&text1=NAME1&text2=NAME2&t=1611058249470");
         }
         sskyplayer.setAttribute("transcript-button", "show");
         // sskyplayer.setAttribute('pre-roll', ''); //image or gif

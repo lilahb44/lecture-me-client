@@ -92,7 +92,14 @@
 
     strong {
       font-family: 'Interstate_Bold', sans-serif;
-      font-size: 1.3rem;
+    }
+
+    &-number{
+      font-size:0.8rem;
+      vertical-align:super;
+      @include respond(660) {
+        font-size: 0.6rem;
+      }
     }
   }
 }
