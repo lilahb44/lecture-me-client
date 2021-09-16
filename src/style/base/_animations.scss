@@ -1,0 +1,16 @@
+@keyframes loader {
+  0% {
+    transform: translateX(-30px);
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  50% {
+    transform: translateX(30px);
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
