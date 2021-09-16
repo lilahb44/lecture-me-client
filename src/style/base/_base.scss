@@ -1,0 +1,44 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+  flex-shrink: 0;
+}
+
+html {
+  //Defines what 1rem is (16px. relative to default browser font size)
+  font-size: 62.5%; //10px;
+}
+
+h1, h2, h3, h4, h5 {
+  margin-block-start: 0;
+  margin-block-end: 0;
+  font-weight: normal;
+}
+
+a {
+  text-decoration: none;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  //overflow: auto;
+  overflow: hidden; //when the page height is more than 100%
+  box-sizing: border-box;
+  font-size: $default-font-size;
+}
+
+#landing-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  background-color: $color-white;
+  position: relative;
+}
+

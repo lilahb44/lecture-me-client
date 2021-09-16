@@ -1,0 +1,43 @@
+@font-face {
+  font-family: 'Interstate_Bold';
+  src: url('fonts/Interstate_Bold.eot');
+  src: url('fonts/Interstate_Bold.ttf') format('ttf'),
+  url('fonts/Interstate_Bold.woff2') format('woff2'),
+  url('fonts/Interstate_Bold.woff') format('woff'),
+  url('fonts/Interstate_Bold.svg') format('svg');
+}
+
+@font-face {
+  font-family: 'Interstate_Regular';
+  src: url('fonts/Interstate_Regular.eot');
+  src: url('fonts/InterstateRegularSmallSigns.ttf') format('truetype'),
+  url('fonts/Interstate_Regular.woff2') format('woff2'),
+  url('fonts/Interstate_Regular.woff') format('woff'),
+  url('fonts/Interstate_Regular.svg') format('svg');
+}
+
+@font-face {
+  font-family: "Interstate-Light";
+  src: url("./fonts/INTLT.eot"); /* IE9 Compat Modes */
+  src: url("./fonts/INTLT.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+  url("./fonts/INTLT.otf") format("opentype"), /* Open Type Font */
+  url("./fonts/INTLT.svg") format("svg"), /* Legacy iOS */
+  url("./fonts/INTLT.ttf") format("truetype"), /* Safari, Android, iOS */
+  url("./fonts/INTLT.woff") format("woff"), /* Modern Browsers */
+  url("./fonts/INTLT.woff2") format("woff2"); /* Modern Browsers */
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Interstate-ExtraLight";
+  src: url("./fonts/INTELT.eot"); /* IE9 Compat Modes */
+  src: url("./fonts/INTELT.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+  url("./fonts/INTELT.otf") format("opentype"), /* Open Type Font */
+  url("./fonts/INTELT.svg") format("svg"), /* Legacy iOS */
+  url("./fonts/INTELT.ttf") format("truetype"), /* Safari, Android, iOS */
+  url("./fonts/INTELT.woff") format("woff"), /* Modern Browsers */
+  url("./fonts/INTELT.woff2") format("woff2"); /* Modern Browsers */
+  font-weight: normal;
+  font-style: normal;
+}
