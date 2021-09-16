@@ -1,0 +1,105 @@
+.main {
+  flex-grow: 1;
+
+  .headlines {
+    display: none;
+    margin-top: 5.5rem;
+    margin-bottom: 4rem;
+    text-align: center;
+    color: $color-blue-text;
+    font-family: 'Interstate_Regular', sans-serif;
+
+    @include respond(1100) {
+      margin-top: 4rem;
+      margin-bottom: 3rem;
+    }
+
+    @include respond(650) {
+      margin-top: 3rem;
+      margin-bottom: 2rem;
+    }
+
+    .line-break {
+      display: none;
+
+      @include respond(650) {
+        display: block;
+      }
+    }
+
+    &--main {
+      font-size: 3.5rem;
+      line-height: 3.8rem;
+
+      @include respond(650) {
+        font-size: 2.5rem;
+        line-height: 2.6rem;
+      }
+
+      @include respond(400) {
+        font-size: 2rem;
+        line-height: 2.3rem;
+      }
+
+      .symbol {
+        font-size: 4rem;
+
+        @include respond(650) {
+          font-size: 2.6rem;
+        }
+      }
+    }
+  }
+
+  .disclaimer {
+    display: none;
+    font-family: 'Interstate_Regular', sans-serif;
+    font-size: 1.3rem;
+    line-height: 1.7rem;
+    width: 100rem;
+    margin-top: 4.7rem;
+    margin-bottom: 3rem;
+
+    @include respond(1100) {
+      width: 80rem;
+    }
+
+    @include respond(900) {
+      width: 90vw;
+    }
+
+    @include respond(700) {
+      margin-left: 2rem
+    }
+
+    a {
+      text-decoration: underline;
+      color: #0062ae;
+    }
+
+    &--big {
+      font-family: 'Interstate_Bold', sans-serif;
+      font-size: 1.8rem;
+
+      @include respond(950) {
+        font-size: 1.6rem;
+      }
+
+      @include respond(500) {
+        font-size: 1.3rem;
+      }
+    }
+
+    strong {
+      font-family: 'Interstate_Bold', sans-serif;
+    }
+
+    &-number{
+      font-size:0.8rem;
+      vertical-align:super;
+      @include respond(660) {
+        font-size: 0.6rem;
+      }
+    }
+  }
+}
