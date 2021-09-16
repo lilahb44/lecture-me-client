@@ -1,0 +1,101 @@
+.footer{
+  height: 10rem;
+  width: 100%;
+  color: white;
+  background-color: $color-gray;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  font-family: 'Interstate-Light', sans-serif;
+  font-size: 1.4rem;
+
+  @include respond(1300){
+    height: 14rem;
+  }
+
+  @include respond(800){
+    height: 18rem;
+    justify-content: center;
+    text-align: center;
+    font-size: 1.3rem;
+  }
+
+  @include respond(500){
+    height: 20rem;
+  }
+
+  &__text--main{
+    margin-left: 9rem;
+    margin-top: 1rem;
+
+    @include respond(800){
+      flex-basis: 100%;
+      margin-top: 1rem;
+      margin-left: 0rem;
+    }
+  }
+
+  .social-links{
+    width: 27rem;
+    display: flex;
+    justify-content: space-between;
+    margin-right: 9rem;
+    margin-top: 1rem;
+
+    @include respond(800){
+      margin-right: 0rem;
+      margin-top: 1rem;
+    }
+
+    @include respond(600){
+      margin-top: 1.2rem;
+    }
+
+    a img{
+      height: 2.5rem;
+      @include respond(800){
+        height: 2.2rem;
+      }
+
+      @include respond(500){
+        height: 2rem;
+        padding: 0 2rem;
+      }
+    }
+  }
+
+  &__text--sub{
+    flex-basis: 100%;
+    display: flex;
+    justify-content: space-between;
+    line-height: 2.2rem;
+
+    @include respond(1300){
+      flex-direction: column;
+      justify-content: unset;
+      align-items: center;
+    }
+
+    @include respond(600){
+      padding: 0 3rem;
+    }
+
+    .copyrights{
+      margin-left: 9rem;
+
+      @include respond(1300){
+        order: 3;
+        margin-left: 0;
+      }
+    }
+
+    .copyrights-last{
+      margin-right: 9rem;
+
+      @include respond(1300){
+        margin-right: 0;
+      }
+    }
+  }
+}
